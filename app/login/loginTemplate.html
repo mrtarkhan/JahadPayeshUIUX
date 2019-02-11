@@ -1,0 +1,14 @@
+<div ng-controller="loginController as vm">
+    <div class="col-6 login-form">
+        <img src="../images/IRILOGO.png">
+        <form ng-submit="vm.login()">
+            <label for="uname"><b>نام کاربری</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required ng-model="vm.username">
+
+            <label for="psw"><b>پسورد</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required ng-model="vm.password">
+
+            <button class="login-button" type="submit">ورود</button>
+        </form>
+    </div>
+</div>

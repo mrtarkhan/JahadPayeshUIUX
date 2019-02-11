@@ -1,0 +1,87 @@
+<div class="row" ng-controller="dashboardController as vm">
+    <div class="spinner" ng-show="loading"><img src="http://i49.tinypic.com/j5z8mb.gif" alt="Yükleniyor..." /></div>
+    <button class="login-button" ng-click="vm.refresh()">بازسازی اطلاعات</button>
+    <div class="col-3">
+        <div class="container from-center tile red">
+            <span class="gray">آخرین خبرها</span>
+            <br><br>
+            <span class="data"> {{vm.dashboardSummery.lastNews}}</span>
+            <hr>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="container from-center tile green">
+            <span class="gray">تعداد کل اخبار</span>
+            <br><br>
+            <span class="data"> {{vm.dashboardSummery.allNews}}</span>
+            <hr>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="container from-center tile yellow">
+            <span class="gray">سامانه های خبری</span>
+            <br><br>
+            <span class="data">{{vm.dashboardSummery.newsPortal}}</span>
+            <hr>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="container from-center tile blue">
+            <span class="gray">خبرهای امروز</span>
+            <br><br>
+            <span class="data">{{vm.dashboardSummery.todayNews}}</span>
+            <hr>
+        </div>
+    </div>
+
+
+    <div class="col-6">
+        <div class="container">
+            <kendo-grid id="recent-news" class="k-rtl" options="vm.mainGridOptions"></kendo-grid>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="container">
+            <div kendo-tab-strip k-options="vm.tabOptions">
+                <ul>
+                    <li class="k-state-active">روز اخیر</li>
+                    <li>هفته اخیر</li>
+                    <li>ماه اخیر</li>
+                </ul>
+
+                <div style="padding: 1em">
+                    <tag-cloud words="todayWords" style="width: 80%; height: 402px;" auto-resize="true" delay="15" steps="7" font-size="{from:0.12, to:0.04}"></tag-cloud>
+                </div>
+                <div style="padding: 1em">
+                    <tag-cloud words="weekWords" style="width: 80%; height: 402px;" auto-resize="true" delay="15" steps="7" font-size="{from:0.12, to:0.04}"></tag-cloud>
+                </div>
+                <div style="padding: 1em">
+                    <tag-cloud words="monthWords" style="width: 80%; height: 402px;" auto-resize="true" delay="15" steps="7" font-size="{from:0.12, to:0.04}"></tag-cloud>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="container inline-division">
+            <div class="card" ng-repeat="item in listNews">
+                <img src="../images/profile.png" />
+                <div class="content">
+                    <span class="title">
+                        <a href="#">{{item.title}}</a>
+                    </span>
+                    <span class="resource">
+                        {{item.resource}}
+                    </span>
+                    <span class="abstract">
+                        {{item.abstract}}
+                    </span>
+                    <span class="date">
+                        {{item.date}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

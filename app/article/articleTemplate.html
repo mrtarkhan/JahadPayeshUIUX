@@ -1,0 +1,63 @@
+<div class="row" ng-controller="articleController as vm">
+    <div class="container">
+        <div class="col-9">
+            <div class="col-title">
+                <span class="pull-right">{{vm.news.title}}</span>
+                <span class="pull-left">تاریخ و زمان: {{vm.news.date}}</span>
+            </div>
+            <div class="col-content article">
+                <div class="abstract">
+                    <p class="from-justify pull-left">
+                        {{vm.news.abstract}}
+                    </p>
+                    <img ng-src="../images/{{image}}" />
+                </div>
+                <div class="clear"></div>
+                <div class="sub-title">
+                    <span>
+                        {{vm.news.category}}
+                    </span>
+                </div>
+                <div class="clear"></div>
+                <div class="content from-justify">
+                    <p>
+                        {{vm.news.body}}
+                    </p>
+                </div>
+                <div class="name-entity">
+                    <div class="sub-title">
+                        موجودیت های نامدار
+                    </div>
+                    <p>
+                        <ul>
+                            <li ng-repeat="item in vm.news.namedEntitySet"><button style="color: blue;padding: 5px; width: 100%; font-family: 'b Yekan';" ng-click="vm.loadEntity(item.id)">{{item.title}}</button></li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="margin-bottom-5">
+                <div class="col-title">اطلاعات خبر</div>
+                <div class="col-content">
+                    <table>
+                        <tr ng-repeat="item in vm.news.newsInfo">
+                            <th>{{item.title}}</th>
+                            <th>{{item.value}}</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="margin-bottom-5">
+                <div class="col-title">اخبار مشابه</div>
+                <div class="col-content">
+                    <ul>
+                        <li ng-repeat="item in vm.news.relatedNews"><button style="color: blue;padding: 5px; width: 100%; font-family: 'b Yekan';" ng-click="vm.loadNews(item.id)">{{item.title}}</button></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
