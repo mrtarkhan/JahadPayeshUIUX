@@ -15,9 +15,46 @@ let controllerFunction = ['$scope', '$timeout', 'dataService', '$state', functio
         })
     }
 
+    vm.dropDownOptions = {
+        filter: 'contains',
+        minLength: 2,
+        dataSource: {
+            data: agencies,
+            schema: {
+                model: {
+                    fields: {
+                        id: {
+                            type: 'string'
+                        },
+                        name: {
+                            type: 'string'
+                        }
+                    }
+                }
+            }
+        },
+        dataTextField: 'name',
+        dataValueField: 'id',
+        noDataTemplate: 'اطلاعاتی یافت نشد!',
+        placeholder: 'خبرگزاری ...',
+        // template: '<span class="badge" style="display: inline-block; min-width: 60px;">#:code #</span> <span>#:name #</span>',
+
+    };
+
 
     vm.mainGridOptions = {
-        dataSource: [],
+        dataSource: {
+            data: {
+                items: [],
+                totalCount: 0
+            },
+            schema: {
+                data: "items",
+                total: "totalCount"
+            },
+            serverPaging: true,
+            pageSize: 10
+        },
         columns: [{
             field: "row",
             title: "ردیف",
@@ -25,27 +62,27 @@ let controllerFunction = ['$scope', '$timeout', 'dataService', '$state', functio
         }, {
             field: "title",
             title: "عنوان",
-            width: 600
+            width: 400
         }, {
             field: "date",
             title: "تاریخ",
-            width: 200
+            width: 150
         }, {
             field: "time",
             title: "زمان",
-            width: 200
+            width: 150
         }, {
             field: "source",
             title: "خبرگزاری",
-            width: 300
+            width: 250
         }],
         height: 500,
         sortable: false,
         filterable: false,
-        scrollable: false,
+        scrollable: true,
         type: "compact",
         selectable: "row",
-        pageable: false,
+        pageable: true,
         change: onChangeGrid
     };
 
@@ -56,11 +93,22 @@ let controllerFunction = ['$scope', '$timeout', 'dataService', '$state', functio
             return;
         }
 
-        dataService.search(vm.searchKeyword).then(function (result) {
+        dataService.search(vm.searchKeyword, vm.agency, vm.startDate, vm.endDate, vm.category).then(function (result) {
             $timeout(function () {
                 $scope.$apply(function () {
                     var grid = $("#search-result").data("kendoGrid");
-                    grid.dataSource.data(result.data);
+                    grid.setDataSource({
+                        data: {
+                            items: [],
+                            totalCount: 0
+                        },
+                        schema: {
+                            data: "items",
+                            total: "totalCount"
+                        },
+                        serverPaging: true,
+                        pageSize: 10
+                    });
                     grid.refresh();
                 });
             });
@@ -71,13 +119,6 @@ let controllerFunction = ['$scope', '$timeout', 'dataService', '$state', functio
     }
 
 
-    vm.dropDownOptions = {
-        dataSource: [],
-        optionLabel: 'انتخاب کنید...',
-        dataTextField: "title",
-        dataValueField: "id"
-    };
-
     getAgencies();
 
     function getAgencies() {
@@ -85,7 +126,11 @@ let controllerFunction = ['$scope', '$timeout', 'dataService', '$state', functio
         $timeout(function () {
 
             var select = $("#agency-dropdown").data("kendoDropDownList");
-            select.dataSource.data(agencies);
+            // select.setDataSource({
+            //     data: agencies,
+
+
+            // });
         });
 
     };

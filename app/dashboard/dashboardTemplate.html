@@ -3,9 +3,9 @@
     <button class="login-button" ng-click="vm.refresh()">بازسازی اطلاعات</button>
     <div class="col-3">
         <div class="container from-center tile red">
-            <span class="gray">آخرین خبرها</span>
+            <span class="gray">خبرهای فوری امروز</span>
             <br><br>
-            <span class="data"> {{vm.dashboardSummery.lastNews}}</span>
+            <span class="data"> {{vm.dashboardSummery.todayCriticalNewsCount}}</span>
             <hr>
         </div>
     </div>
@@ -13,7 +13,7 @@
         <div class="container from-center tile green">
             <span class="gray">تعداد کل اخبار</span>
             <br><br>
-            <span class="data"> {{vm.dashboardSummery.allNews}}</span>
+            <span class="data"> {{vm.dashboardSummery.totalNewsCount}}</span>
             <hr>
         </div>
     </div>
@@ -21,7 +21,7 @@
         <div class="container from-center tile yellow">
             <span class="gray">سامانه های خبری</span>
             <br><br>
-            <span class="data">{{vm.dashboardSummery.newsPortal}}</span>
+            <span class="data">{{vm.dashboardSummery.agencyCount}}</span>
             <hr>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="container from-center tile blue">
             <span class="gray">خبرهای امروز</span>
             <br><br>
-            <span class="data">{{vm.dashboardSummery.todayNews}}</span>
+            <span class="data">{{vm.dashboardSummery.todayNewsCount}}</span>
             <hr>
         </div>
     </div>
@@ -68,16 +68,16 @@
                 <img src="../images/profile.png" />
                 <div class="content">
                     <span class="title">
-                        <a href="#">{{item.title}}</a>
+                        <a href="#">{{item.topic}}</a>
                     </span>
                     <span class="resource">
-                        {{item.resource}}
+                        {{item.agency}}
                     </span>
                     <span class="abstract">
-                        {{item.abstract}}
+                        {{item.headline}}
                     </span>
                     <span class="date">
-                        {{item.date}}
+                        {{item.formattedPublishDateTime}}
                     </span>
                 </div>
             </div>

@@ -13,51 +13,52 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
     //options
     vm.mainGridOptions = {
 
-        dataSource: {
-            transport: {
-                read: {
-                    url: apis.recentlyNews,
-                },
-                parameterMap: function (data, type) {
-                    return kendo.stringify(data);
-                }
-            },
-            schema: {
-                data: "data",
-                total: "total"
-            },
-            serverPaging: true,
-            pageSize: 1
-        },
+        // dataSource: {
+        //     transport: {
+        //         read: {
+        //             url: apis.recentNews,
+        //         }
+        //         //parameterMap: function (data, type) {
+        //         //    return kendo.stringify(data);
+        //         //}
+        //     },
+        //     schema: {
+        //         data: "data",
+        //         total: "total"
+        //     },
+        //     serverPaging: true,
+        //     pageSize: 10
+        // },
+        dataSource: [],
         columns: [{
             field: "row",
             title: "ردیف",
             width: 55
         }, {
-            field: "title",
+            field: "topic",
             title: "عنوان",
             width: 160
         }, {
-            field: "date",
+            field: "publishDate",
             title: "تاریخ",
             width: 115
         }, {
-            field: "time",
+            field: "publishTime",
             title: "زمان",
             width: 65
         }, {
-            field: "source",
+            field: "agency",
             title: "خبرگزاری",
             width: 100
         }],
         height: 478,
         sortable: false,
         filterable: false,
-        scrollable: false,
+        scrollable: true,
         type: "compact",
         selectable: "row",
         pageable: {
-            pageSizes: [2, 5, 8],
+            pageSizes: [20, 50, 100, 1000],
             numeric: false
         },
         change: onChangeGrid
@@ -69,7 +70,7 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
                 effects: "fadeIn"
             }
         }
-    }
+    };
 
 
 
@@ -78,11 +79,11 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
         getTodayCloudWord();
         getWeekCloudWord();
         getMonthCloudWord();
-        //getRecentlyNews();
+        getRecentlyNews();
         getListNews();
         getNewsInformation();
         getAgencies();
-    }
+    };
 
 
     //call them
@@ -134,18 +135,17 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
     }
 
 
-    // function getRecentlyNews() {
-    //     dataService.getRecentlyNews().then(function (result) {
-    //         console.log(result);
-    //         var grid = angular.element("#recent-news").data("kendoGrid");
-    //         grid.setDataSource(new kendo.data.DataSource({
-    //             data: result.data,
-    //             pageSize: 100
-    //         }));
-    //     }, function (error) {
-    //         alertify.error(error.data);
-    //     });
-    // }
+    function getRecentlyNews() {
+        dataService.getRecentlyNews().then(function (result) {
+            var grid = angular.element("#recent-news").data("kendoGrid");
+            grid.setDataSource(new kendo.data.DataSource({
+                data: result.data,
+                pageSize: 20
+            }));
+        }, function (error) {
+            alertify.error(error.data);
+        });
+    }
 
     function getListNews() {
         //listNews
@@ -161,7 +161,7 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
     function onChangeGrid(e) {
         var selectedRow = this.select();
         vm.selectedNews = this.dataItem(selectedRow[0]);
-        console.log(vm.selectedNews)
+        console.log(vm.selectedNews);
         $state.go("article", {
             newsId: vm.selectedNews.id
         });
@@ -173,8 +173,10 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
             return;
             
         dataService.getAgencies().then(function (result) {
-            console.log(result);
-            angular.copy(result.data, agencies);
+            agencies = [];
+            angular.forEach(result.data, function(value){
+                agencies.push(value);
+            });
         }, function (error) {
             throw error;
         })

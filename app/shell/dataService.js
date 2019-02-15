@@ -12,9 +12,9 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
                 method: 'GET',
                 url: window.location.origin + '/api/shell/urls.json',
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {}
+                params: {}
             }
             $http(req)
                 .then(function (result) {
@@ -40,11 +40,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.login,
+                url: apis.login,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "username": user,
                     "password": pass
                 }
@@ -74,14 +74,13 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getNewsInformation,
+                url: apis.newsInformation,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
-                    //test: 'test'
+                params: {
                 }
-            }
+            };
             $http(req)
                 .then(function (result) {
                     defer.resolve(result);
@@ -100,11 +99,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getCloudWord,
+                url: apis.getCloudWord,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     type: cloudType
                 }
             }
@@ -126,11 +125,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getRecentlyNews ,
+                url: apis.recentNews,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     //test: 'test'
                 }
             }
@@ -152,11 +151,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getListNews,
+                url: apis.getListNews,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     //test: 'test'
                 }
             }
@@ -183,11 +182,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getArticleData ,
+                url: apis.getArticleData ,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "id": id
                 }
             }
@@ -213,11 +212,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getListNewsBySearch ,
+                url: apis.getListNewsBySearch ,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     keyword: keyword
                 }
             }
@@ -239,11 +238,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getSocialInfo ,
+                url: apis.getSocialInfo ,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     social: data
                 }
             }
@@ -270,11 +269,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getProfileData ,
+                url: apis.getProfileData ,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "id": id
                 }
             }
@@ -296,11 +295,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.searchProfile ,
+                url: apis.searchProfile ,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "keyword": word
                 }
             }
@@ -320,17 +319,21 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
 
 
     //search
-    function search(keyword) {
+    function search(keyword, agency, startDate, endDate, category) {
         var defer = $q.defer();
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.search ,
+                url: apis.search ,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
-                    "keyword": keyword
+                params: {
+                    "keyword": keyword,
+                    "agencies":agency, 
+                    "datemin":startDate, 
+                    "datemax": endDate, 
+                    "topic":category
                 }
             }
             $http(req)
@@ -356,11 +359,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.searchForMap,
+                url: apis.searchForMap,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "agency": agency,
                     "category": category
                 }
@@ -389,11 +392,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getBulletinSet,
+                url: apis.getBulletinSet,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "username": username
                 }
             }
@@ -415,11 +418,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'POST',
-                url: window.location.origin + apis.update,
+                url:  apis.update,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "username": username,
                     "data": data
                 }
@@ -442,11 +445,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'POST',
-                url: window.location.origin + apis.deleteBulletin ,
+                url:  apis.deleteBulletin ,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "username": username,
                     "data": data
                 }
@@ -469,11 +472,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.searchBulletin ,
+                url:  apis.searchBulletin ,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "username": username,
                     "data": data
                 }
@@ -496,11 +499,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getAgencyData,
+                url:  apis.getAgencyData,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {}
+                params: {}
             }
             $http(req)
                 .then(function (result) {
@@ -520,11 +523,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.getCategoryList ,
+                url:  apis.getCategoryList ,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {}
+                params: {}
             }
             $http(req)
                 .then(function (result) {
@@ -549,11 +552,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'POST',
-                url: window.location.origin + apis.sendTicket,
+                url:  apis.sendTicket,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {
+                params: {
                     "title": ticket.title,
                     "description": ticket.description,
                     "place": ticket.place
@@ -582,12 +585,12 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
         try {
             var req = {
                 method: 'GET',
-                url: window.location.origin + apis.agencies,
+                url: apis.agencies,
                 headers: {
-                    'Content-Type': 'application/json'
+
                 },
-                data: {}
-            }
+                params: {}
+            };
             $http(req)
                 .then(function (result) {
                     defer.resolve(result);

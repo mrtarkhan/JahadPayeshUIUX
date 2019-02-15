@@ -1,17 +1,19 @@
+var apiBaseUrl = "http://185.208.181.61:8080";
 var apis = {
-    'recentlyNews': '/api/dashboard/recentlyNews.json',
-    'agencies': '/api/dashboard/agencies.json',
+    'agencies': apiBaseUrl + "/ui/agency/list",
+    'newsInformation': apiBaseUrl + "/ui/kpi/homepage",
+    'search': apiBaseUrl + "/ui/news/search",
+
+    'recentNews': apiBaseUrl + "/ui/news/recent",
+
     'login': '/api/auth/login',
-    'getNewsInformation': '/api/dashboard/newsInformation.json',
     'getCloudWord': '/api/dashboard/cloudWord.json',
-    'getRecentlyNews': '/api/dashboard/recentlyNews.json',
     'getListNews': '/api/dashboard/listNews.json',
     'getArticleData': '/api/article/data.json',
     'getListNewsBySearch': '/api/dashboard/listNews.json',
     'getSocialInfo': '/api/social/getSocialInfo.json',
     'getProfileData': '/api/profile/profileData.json',
     'searchProfile': '/api/profile/searchProfile.json',
-    'search': '/api/search/searchResult.json',
     'searchForMap': '/api/map/searchForMap.json',
     'getBulletinSet': '/api/bulletin/getBulletinSet.json',
     'update': '/api/bulletin/update',

@@ -2,20 +2,20 @@
     <div class="container">
         <div class="col-9">
             <div class="col-title">
-                <span class="pull-right">{{vm.news.title}}</span>
-                <span class="pull-left">تاریخ و زمان: {{vm.news.date}}</span>
+                <span class="pull-right">{{vm.news.topic}}</span>
+                <span class="pull-left">تاریخ و زمان: {{vm.news.formattedPublishDateTime}}</span>
             </div>
             <div class="col-content article">
                 <div class="abstract">
                     <p class="from-justify pull-left">
-                        {{vm.news.abstract}}
+                        {{vm.news.headline}}
                     </p>
-                    <img ng-src="../images/{{image}}" />
+                    <img ng-src="{{vm.news.images}}" />
                 </div>
                 <div class="clear"></div>
                 <div class="sub-title">
                     <span>
-                        {{vm.news.category}}
+                        {{vm.news.section}}
                     </span>
                 </div>
                 <div class="clear"></div>
