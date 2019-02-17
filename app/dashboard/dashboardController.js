@@ -31,10 +31,6 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
         // },
         dataSource: [],
         columns: [{
-            field: "row",
-            title: "ردیف",
-            width: 55
-        }, {
             field: "topic",
             title: "عنوان",
             width: 160
@@ -57,10 +53,6 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
         scrollable: true,
         type: "compact",
         selectable: "row",
-        pageable: {
-            pageSizes: [20, 50, 100, 1000],
-            numeric: false
-        },
         change: onChangeGrid
     };
 
@@ -80,9 +72,12 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
         getWeekCloudWord();
         getMonthCloudWord();
         getRecentlyNews();
-        getListNews();
+        //getListNews();
         getNewsInformation();
         getAgencies();
+        getTodayTopics();
+        getWeekTopics();
+        getMonthTopics();
     };
 
 
@@ -98,6 +93,9 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
         })
     }
 
+
+
+    //cloud words
     function getTodayCloudWord() {
         dataService.getCloudWord(1).then(function (result) {
             $timeout(function () {
@@ -135,33 +133,182 @@ let controllerFunction = ['$scope', '$timeout', '$state', 'dataService', functio
     }
 
 
+
+
+    //topics
+    function getTodayTopics () {
+        dataService.getTopicsData(1).then(function (result) {
+            $timeout(function () {
+                $scope.$apply(function () {
+                    $("#today-topics").kendoChart({
+                        title: {
+                            text: "خبرهای هر موضوع"
+                        },
+                        legend: {
+                            visible: false
+                        },
+                        seriesDefaults: {
+                            type: "bar"
+                        },
+                        series: [{
+                            name: "خبرهای این موضوع",
+                            data: angular.copy(result.data.numbers)
+                        }],
+                        valueAxis: {
+                            max: 140000,
+                            line: {
+                                visible: false
+                            },
+                            minorGridLines: {
+                                visible: true
+                            },
+                            labels: {
+                                rotation: "auto"
+                            }
+                        },
+                        categoryAxis: {
+                            categories: angular.copy(result.data.topics),
+                            majorGridLines: {
+                                visible: false
+                            }
+                        },
+                        tooltip: {
+                            visible: true,
+                            template: "#= series.name #: #= value #"
+                        }
+                    });
+        
+                });
+            }, 500);
+        }, function (error) {
+            alertify.error(error.data);
+        });
+    }
+
+    function getWeekTopics () {
+        dataService.getTopicsData(2).then(function (result) {
+            $timeout(function () {
+                $scope.$apply(function () {
+                    $("#week-topics").kendoChart({
+                        title: {
+                            text: "خبرهای هر موضوع"
+                        },
+                        legend: {
+                            visible: false
+                        },
+                        seriesDefaults: {
+                            type: "bar"
+                        },
+                        series: [{
+                            name: "خبرهای این موضوع",
+                            data: angular.copy(result.data.numbers)
+                        }],
+                        valueAxis: {
+                            max: 140000,
+                            line: {
+                                visible: false
+                            },
+                            minorGridLines: {
+                                visible: true
+                            },
+                            labels: {
+                                rotation: "auto"
+                            }
+                        },
+                        categoryAxis: {
+                            categories: angular.copy(result.data.topics),
+                            majorGridLines: {
+                                visible: false
+                            }
+                        },
+                        tooltip: {
+                            visible: true,
+                            template: "#= series.name #: #= value #"
+                        }
+                    });                });
+            }, 500);
+        }, function (error) {
+            alertify.error(error.data);
+        });
+    }
+
+    function getMonthTopics () {
+        dataService.getTopicsData(3).then(function (result) {
+            $timeout(function () {
+                $("#month-topics").kendoChart({
+                    title: {
+                        text: "خبرهای هر موضوع"
+                    },
+                    legend: {
+                        visible: false
+                    },
+                    seriesDefaults: {
+                        type: "bar"
+                    },
+                    series: [{
+                        name: "خبرهای این موضوع",
+                        data: angular.copy(result.data.numbers)
+                    }],
+                    valueAxis: {
+                        max: 140000,
+                        line: {
+                            visible: false
+                        },
+                        minorGridLines: {
+                            visible: true
+                        },
+                        labels: {
+                            rotation: "auto"
+                        }
+                    },
+                    categoryAxis: {
+                        categories: angular.copy(result.data.topics),
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+                    tooltip: {
+                        visible: true,
+                        template: "#= series.name #: #= value #"
+                    }
+                });
+            }, 500);
+        }, function (error) {
+            alertify.error(error.data);
+        });
+    }
+
+
+
+
+
+
     function getRecentlyNews() {
         dataService.getRecentlyNews().then(function (result) {
             var grid = angular.element("#recent-news").data("kendoGrid");
             grid.setDataSource(new kendo.data.DataSource({
-                data: result.data,
-                pageSize: 20
+                data: result.data
             }));
         }, function (error) {
             alertify.error(error.data);
         });
     }
 
+
+
+
     function getListNews() {
         //listNews
         dataService.getListNews().then(function (result) {
-            console.log(result);
             angular.copy(result.data, $scope.listNews);
         }, function (error) {
             throw error;
         })
     }
 
-
     function onChangeGrid(e) {
         var selectedRow = this.select();
         vm.selectedNews = this.dataItem(selectedRow[0]);
-        console.log(vm.selectedNews);
         $state.go("article", {
             newsId: vm.selectedNews.id
         });

@@ -4,12 +4,13 @@ var apis = {
     'newsInformation': apiBaseUrl + "/ui/kpi/homepage",
     'search': apiBaseUrl + "/ui/news/search",
 
-    'recentNews': apiBaseUrl + "/ui/news/recent",
+    'recentNews': apiBaseUrl + "/ui/news/recent",    
+    'getArticleData': apiBaseUrl + "/ui/news/article",
+    'getTopicsData': '/api/dashboard/topics.json',//apiBaseUrl + "/ui/news/topics",
 
     'login': '/api/auth/login',
     'getCloudWord': '/api/dashboard/cloudWord.json',
     'getListNews': '/api/dashboard/listNews.json',
-    'getArticleData': '/api/article/data.json',
     'getListNewsBySearch': '/api/dashboard/listNews.json',
     'getSocialInfo': '/api/social/getSocialInfo.json',
     'getProfileData': '/api/profile/profileData.json',

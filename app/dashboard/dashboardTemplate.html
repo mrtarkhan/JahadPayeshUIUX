@@ -35,12 +35,12 @@
     </div>
 
 
-    <div class="col-6">
+    <div class="col-12">
         <div class="container">
             <kendo-grid id="recent-news" class="k-rtl" options="vm.mainGridOptions"></kendo-grid>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-12">
         <div class="container">
             <div kendo-tab-strip k-options="vm.tabOptions">
                 <ul>
@@ -49,14 +49,33 @@
                     <li>ماه اخیر</li>
                 </ul>
 
-                <div style="padding: 1em">
-                    <tag-cloud words="todayWords" style="width: 80%; height: 402px;" auto-resize="true" delay="15" steps="7" font-size="{from:0.12, to:0.04}"></tag-cloud>
+                <div class="col-12" style="padding: 1em">
+                    <div class="col-6">
+                        <tag-cloud words="todayWords" style="width: 80%; height: 402px;" auto-resize="true" delay="15"
+                            steps="7" font-size="{from:0.12, to:0.04}"></tag-cloud>
+                    </div>                    
+                    <div class="col-5">
+                        <div id="today-topics"></div>
+                    </div>
                 </div>
-                <div style="padding: 1em">
-                    <tag-cloud words="weekWords" style="width: 80%; height: 402px;" auto-resize="true" delay="15" steps="7" font-size="{from:0.12, to:0.04}"></tag-cloud>
+                <div class="col-12" style="padding: 1em">
+                    <div class="col-6">
+                        <tag-cloud words="weekWords" style="width: 80%; height: 402px;" auto-resize="true" delay="15"
+                            steps="7" font-size="{from:0.12, to:0.04}"></tag-cloud>
+                    </div>                   
+                    <div class="col-5">
+                        <div id="week-topics"></div>
+                    </div>
+
                 </div>
-                <div style="padding: 1em">
-                    <tag-cloud words="monthWords" style="width: 80%; height: 402px;" auto-resize="true" delay="15" steps="7" font-size="{from:0.12, to:0.04}"></tag-cloud>
+                <div class="col-12" style="padding: 1em">
+                    <div class="col-6">
+                        <tag-cloud words="monthWords" style="width: 80%; height: 402px;" auto-resize="true" delay="15"
+                            steps="7" font-size="{from:0.12, to:0.04}"></tag-cloud>
+                    </div>                   
+                    <div class="col-5">
+                        <div id="month-topics"></div>
+                    </div>
                 </div>
             </div>
         </div>

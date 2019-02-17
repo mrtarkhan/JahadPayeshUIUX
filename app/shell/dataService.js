@@ -184,7 +184,7 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
                 method: 'GET',
                 url: apis.getArticleData ,
                 headers: {
-
+                    
                 },
                 params: {
                     "id": id
@@ -579,6 +579,36 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
 
 
 
+    //topics
+    function getTopicsData (type) {
+        var defer = $q.defer();
+        try {
+            var req = {
+                method: 'GET',
+                url: apis.getTopicsData,
+                headers: {
+
+                },
+                params: {
+                    "type": type
+                }
+            }
+            $http(req)
+                .then(function (result) {
+                    defer.resolve(result);
+                }, function (error) {
+                    defer.reject(error);
+                });
+        } catch (e) {
+            defer.reject(e);
+        } finally {
+            return defer.promise;
+        }
+    }
+
+
+
+
     //agencies
     function getAgencies() {
         var defer = $q.defer();
@@ -659,6 +689,11 @@ let serviceFunction = ['$http', '$q', function ($http, $q) {
 
 
         
+        //topics
+        getTopicsData: getTopicsData,
+
+
+
         getAgencies:getAgencies
     }
 
