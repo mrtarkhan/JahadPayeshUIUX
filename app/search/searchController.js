@@ -52,27 +52,27 @@ let controllerFunction = ['$scope', '$timeout', 'dataService', '$state', functio
                 data: "items",
                 total: "totalCount"
             },
-            serverPaging: true,
-            pageSize: 10
+            //serverPaging: true,
+            pageSize: 20
         },
         columns: [{
-            field: "row",
-            title: "ردیف",
+            field: "section",
+            title: "بخش",
             width: 100
         }, {
-            field: "title",
+            field: "topic",
             title: "عنوان",
             width: 400
         }, {
-            field: "date",
+            field: "publishDate",
             title: "تاریخ",
             width: 150
         }, {
-            field: "time",
+            field: "publishTime",
             title: "زمان",
             width: 150
         }, {
-            field: "source",
+            field: "agency",
             title: "خبرگزاری",
             width: 250
         }],
@@ -99,15 +99,15 @@ let controllerFunction = ['$scope', '$timeout', 'dataService', '$state', functio
                     var grid = $("#search-result").data("kendoGrid");
                     grid.setDataSource({
                         data: {
-                            items: [],
-                            totalCount: 0
+                            items: result.data.items,
+                            totalCount: result.data.totalCount
                         },
                         schema: {
                             data: "items",
                             total: "totalCount"
                         },
-                        serverPaging: true,
-                        pageSize: 10
+                        serverPaging: false,
+                        pageSize: 20
                     });
                     grid.refresh();
                 });
